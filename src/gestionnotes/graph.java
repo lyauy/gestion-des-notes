@@ -41,7 +41,7 @@ public class graph extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TxtFieldNum = new javax.swing.JTextField();
         TxtFieldNom = new javax.swing.JTextField();
         TxtFieldPrenom = new javax.swing.JTextField();
         ComboBranche = new javax.swing.JComboBox<>();
@@ -85,12 +85,12 @@ public class graph extends javax.swing.JFrame {
         jLabel1.setMaximumSize(new java.awt.Dimension(101, 30));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 376, 32));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TxtFieldNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TxtFieldNumActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 92, 193, -1));
+        getContentPane().add(TxtFieldNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 92, 193, -1));
 
         TxtFieldNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,9 +172,9 @@ public class graph extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtFieldNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFieldNumActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TxtFieldNumActionPerformed
 
     private void TxtFieldNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFieldNomActionPerformed
         // TODO add your handling code here:
@@ -185,13 +185,14 @@ public class graph extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFieldNoteActionPerformed
 
     private void ButtonAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAjoutActionPerformed
-        String sql = "INSERT INTO eleve (prenom, nom, branche, note) " + "VALUES ('" + TxtFieldNom.getText() + "', '" + TxtFieldPrenom.getText() + "', '" + String.valueOf(ComboBranche.getSelectedItem()) + "', " + TxtFieldNote.getText() + ")";
+        String sql = "INSERT INTO eleve (numero, prenom, nom, branche, note) " + "VALUES (" + TxtFieldNum.getText() + ", '" + TxtFieldNom.getText() + "', '" + TxtFieldPrenom.getText() + "', '" + String.valueOf(ComboBranche.getSelectedItem()) + "', " + TxtFieldNote.getText() + ")";
         System.out.println("Requete :" + sql);
         try {
             conn.getStatement().executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ActualisationJTable();
     }//GEN-LAST:event_ButtonAjoutActionPerformed
 
     private void ComboBrancheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBrancheActionPerformed
@@ -212,7 +213,7 @@ public class graph extends javax.swing.JFrame {
         final String valueInCell = (String) jTable1.getValueAt(row, 1);
 
         for (int i = 0; i < rows.length; i++) {
-            sql = "DELETE FROM eleve WHERE id = '" + jTable1.getValueAt(rows[i], 0) + "';";
+            sql = "DELETE FROM eleve WHERE numero = '" + jTable1.getValueAt(rows[i], 0) + "';";
             System.out.println("Requete :" + sql);
             try {
                 conn.getStatement().executeUpdate(sql);
@@ -268,6 +269,7 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboBranche;
     private javax.swing.JTextField TxtFieldNom;
     private javax.swing.JTextField TxtFieldNote;
+    private javax.swing.JTextField TxtFieldNum;
     private javax.swing.JTextField TxtFieldPrenom;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -282,7 +284,6 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 
@@ -295,7 +296,7 @@ public class graph extends javax.swing.JFrame {
             model.setRowCount(0);
             ResultSet rs = conn.getStatement().executeQuery(sql);
             while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("id"), rs.getString("prenom"), rs.getString("Nom"), rs.getString("branche"), rs.getString("note")});
+                model.addRow(new Object[]{rs.getString("numero"), rs.getString("prenom"), rs.getString("Nom"), rs.getString("branche"), rs.getString("note")});
                 System.out.println(rs.getString("prenom"));
                 i++;
             }
