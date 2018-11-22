@@ -50,10 +50,10 @@ public class graph extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        ButtonAjout = new javax.swing.JButton();
+        ButtonSupprimer = new javax.swing.JButton();
+        ButtonModifier = new javax.swing.JButton();
+        ButtonActualiser = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -64,6 +64,7 @@ public class graph extends javax.swing.JFrame {
         jButton6.setText("jButton6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestion des notes");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -128,27 +129,32 @@ public class graph extends javax.swing.JFrame {
         jLabel7.setText("Note :");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 255, -1, -1));
 
-        jButton1.setText("Ajouter");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonAjout.setText("Ajouter");
+        ButtonAjout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonAjoutActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        getContentPane().add(ButtonAjout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
-        jButton2.setText("Supprimer");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, -1, -1));
-
-        jButton3.setText("Modifier");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
-
-        jButton4.setText("Actualiser");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ButtonSupprimer.setText("Supprimer");
+        ButtonSupprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ButtonSupprimerActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
+        getContentPane().add(ButtonSupprimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, -1, -1));
+
+        ButtonModifier.setText("Modifier");
+        getContentPane().add(ButtonModifier, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
+
+        ButtonActualiser.setText("Actualiser");
+        ButtonActualiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonActualiserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonActualiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         jLabel8.setText("Rechercher : ");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
@@ -162,6 +168,7 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 230, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -176,7 +183,7 @@ public class graph extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtFieldNoteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAjoutActionPerformed
         String sql = "INSERT INTO eleve (prenom, nom, branche, note) " + "VALUES ('" + TxtFieldNom.getText() + "', '" + TxtFieldPrenom.getText() + "', '" + String.valueOf(ComboBranche.getSelectedItem()) + "', " + TxtFieldNote.getText() + ")";
         System.out.println("Requete :" + sql);
         try {
@@ -184,13 +191,13 @@ public class graph extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ButtonAjoutActionPerformed
 
     private void ComboBrancheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBrancheActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBrancheActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void ButtonActualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonActualiserActionPerformed
         String sql = ("SELECT * FROM eleve");
         System.out.println("Requete :" + sql);
         try {
@@ -198,7 +205,7 @@ public class graph extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
             ResultSet rs = conn.getStatement().executeQuery(sql);
-            while(rs.next()) {
+            while (rs.next()) {
                 model.addRow(new Object[]{i, rs.getString("prenom"), rs.getString("Nom"), rs.getString("branche"), rs.getString("note")});
                 System.out.println(rs.getString("prenom"));
                 i++;
@@ -206,7 +213,23 @@ public class graph extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_ButtonActualiserActionPerformed
+
+    private void ButtonSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSupprimerActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int[] rows = jTable1.getSelectedRows();
+//        String sql;
+        for (int i = 0; i < rows.length; i++) {
+            model.removeRow(rows[i] - i);
+//            sql = "DELETE FROM eleve WHERE id = '" + (i + 1) + "';";
+//            System.out.println("Requete :" + sql);
+//            try {
+//                conn.getStatement().executeUpdate(sql);
+//            } catch (SQLException ex) {
+//                Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
+    }//GEN-LAST:event_ButtonSupprimerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,14 +267,14 @@ public class graph extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonActualiser;
+    private javax.swing.JButton ButtonAjout;
+    private javax.swing.JButton ButtonModifier;
+    private javax.swing.JButton ButtonSupprimer;
     private javax.swing.JComboBox<String> ComboBranche;
     private javax.swing.JTextField TxtFieldNom;
     private javax.swing.JTextField TxtFieldNote;
     private javax.swing.JTextField TxtFieldPrenom;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
