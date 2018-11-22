@@ -42,7 +42,11 @@ public class Connexion {
         }
         ;
     }
-
+    
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
+        
     public Statement getStatement() {
         return statement;
     }

@@ -5,16 +5,18 @@
  */
 package gestionnotes;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Hexor
  */
 public class graph extends javax.swing.JFrame {
-    
+
     Connexion conn = new Connexion();
 
     /**
@@ -39,10 +41,10 @@ public class graph extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField4 = new javax.swing.JTextField();
+        TxtFieldNom = new javax.swing.JTextField();
+        TxtFieldPrenom = new javax.swing.JTextField();
+        ComboBranche = new javax.swing.JComboBox<>();
+        TxtFieldNote = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -66,46 +68,7 @@ public class graph extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "id", "nom", "prenom", "branche", "note"
@@ -127,28 +90,28 @@ public class graph extends javax.swing.JFrame {
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 92, 193, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        TxtFieldNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                TxtFieldNomActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 132, 193, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 172, 193, -1));
+        getContentPane().add(TxtFieldNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 132, 193, -1));
+        getContentPane().add(TxtFieldPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 172, 193, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatique", "Physique/Chimie", "SVT", "Français", "Mathématiques", "Anglais", "Histoire/Géographie", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ComboBranche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatique", "Physique/Chimie", "SVT", "Français", "Mathématiques", "Anglais", "Histoire/Géographie", " " }));
+        ComboBranche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ComboBrancheActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 212, -1, -1));
+        getContentPane().add(ComboBranche, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 212, -1, -1));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        TxtFieldNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                TxtFieldNoteActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 252, 193, -1));
+        getContentPane().add(TxtFieldNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 252, 193, -1));
 
         jLabel3.setText("id :");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 95, -1, -1));
@@ -180,6 +143,11 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
 
         jButton4.setText("Actualiser");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         jLabel8.setText("Rechercher : ");
@@ -191,7 +159,7 @@ public class graph extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
         jLabel9.setText("Réalisé par Ugo Perniceni, Thibaut Yauy");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 230, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,16 +168,16 @@ public class graph extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void TxtFieldNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFieldNomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_TxtFieldNomActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void TxtFieldNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFieldNoteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_TxtFieldNoteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sql = "INSERT INTO eleve (prenom, nom, branche, note) " + "VALUES ('"+jTextField2.getText()+"', '"+jTextField3.getText()+"', '"+String.valueOf(jComboBox1.getSelectedItem())+"', "+jTextField4.getText()+")";
+        String sql = "INSERT INTO eleve (prenom, nom, branche, note) " + "VALUES ('" + TxtFieldNom.getText() + "', '" + TxtFieldPrenom.getText() + "', '" + String.valueOf(ComboBranche.getSelectedItem()) + "', " + TxtFieldNote.getText() + ")";
         System.out.println("Requete :" + sql);
         try {
             conn.getStatement().executeUpdate(sql);
@@ -218,9 +186,27 @@ public class graph extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ComboBrancheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBrancheActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ComboBrancheActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String sql = ("SELECT * FROM eleve");
+        System.out.println("Requete :" + sql);
+        try {
+            int i = 1;
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            ResultSet rs = conn.getStatement().executeQuery(sql);
+            while(rs.next()) {
+                model.addRow(new Object[]{i, rs.getString("prenom"), rs.getString("Nom"), rs.getString("branche"), rs.getString("note")});
+                System.out.println(rs.getString("prenom"));
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,13 +244,16 @@ public class graph extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboBranche;
+    private javax.swing.JTextField TxtFieldNom;
+    private javax.swing.JTextField TxtFieldNote;
+    private javax.swing.JTextField TxtFieldPrenom;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -277,9 +266,6 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
