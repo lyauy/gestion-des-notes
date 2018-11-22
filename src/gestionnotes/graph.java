@@ -24,6 +24,7 @@ public class graph extends javax.swing.JFrame {
      */
     public graph() {
         initComponents();
+        ActualisationJTable();
     }
 
     /**
@@ -99,7 +100,7 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(TxtFieldNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 132, 193, -1));
         getContentPane().add(TxtFieldPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 172, 193, -1));
 
-        ComboBranche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatique", "Physique/Chimie", "SVT", "Français", "Mathématiques", "Anglais", "Histoire/Géographie", " " }));
+        ComboBranche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatique", "Physique/Chimie", "SVT", "Français", "Mathématiques", "Anglais", "Histoire/Géographie" }));
         ComboBranche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBrancheActionPerformed(evt);
@@ -198,37 +199,30 @@ public class graph extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboBrancheActionPerformed
 
     private void ButtonActualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonActualiserActionPerformed
-        String sql = ("SELECT * FROM eleve");
-        System.out.println("Requete :" + sql);
-        try {
-            int i = 1;
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
-            ResultSet rs = conn.getStatement().executeQuery(sql);
-            while (rs.next()) {
-                model.addRow(new Object[]{i, rs.getString("prenom"), rs.getString("Nom"), rs.getString("branche"), rs.getString("note")});
-                System.out.println(rs.getString("prenom"));
-                i++;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ActualisationJTable();
     }//GEN-LAST:event_ButtonActualiserActionPerformed
 
     private void ButtonSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSupprimerActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int[] rows = jTable1.getSelectedRows();
-//        String sql;
+        String sql;
+
+        final int row = jTable1.getSelectedRow();
+
+        final String valueInCell = (String) jTable1.getValueAt(row, 1);
+
         for (int i = 0; i < rows.length; i++) {
-            model.removeRow(rows[i] - i);
-//            sql = "DELETE FROM eleve WHERE id = '" + (i + 1) + "';";
-//            System.out.println("Requete :" + sql);
-//            try {
-//                conn.getStatement().executeUpdate(sql);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            sql = "DELETE FROM eleve WHERE id = '" + jTable1.getValueAt(rows[i], 0) + "';";
+            System.out.println("Requete :" + sql);
+            try {
+                conn.getStatement().executeUpdate(sql);
+//                model.removeRow(rows[i]);
+            } catch (SQLException ex) {
+                Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
+        ActualisationJTable();
     }//GEN-LAST:event_ButtonSupprimerActionPerformed
 
     /**
@@ -291,4 +285,22 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+    private void ActualisationJTable() {
+        String sql = ("SELECT * FROM eleve");
+        System.out.println("Requete :" + sql);
+        try {
+            int i = 1;
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            ResultSet rs = conn.getStatement().executeQuery(sql);
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString("id"), rs.getString("prenom"), rs.getString("Nom"), rs.getString("branche"), rs.getString("note")});
+                System.out.println(rs.getString("prenom"));
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
