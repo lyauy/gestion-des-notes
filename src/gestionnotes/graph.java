@@ -24,7 +24,7 @@ public class graph extends javax.swing.JFrame {
      */
     public graph() {
         initComponents();
-        ActualisationJTable();
+        ActualisationJTable("SELECT * FROM eleve");
     }
 
     /**
@@ -56,9 +56,11 @@ public class graph extends javax.swing.JFrame {
         ButtonModifier = new javax.swing.JButton();
         ButtonActualiser = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        TxtFieldRecherche = new javax.swing.JTextField();
+        ButtonOk = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        ButtonOk1 = new javax.swing.JButton();
+        ButtonAnnuler = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -66,6 +68,7 @@ public class graph extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion des notes");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,15 +161,36 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(ButtonActualiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         jLabel8.setText("Rechercher : ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 68, 170, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 80, 20));
+        getContentPane().add(TxtFieldRecherche, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 170, -1));
 
-        jButton5.setText("OK");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, 20));
+        ButtonOk.setText("OK");
+        ButtonOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonOkActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 70, 20));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
         jLabel9.setText("Réalisé par Ugo Perniceni, Thibaut Yauy");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 230, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, 230, -1));
+
+        ButtonOk1.setText("OK");
+        ButtonOk1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonOk1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonOk1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 70, 20));
+
+        ButtonAnnuler.setText("Annuler");
+        ButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAnnulerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 90, 20));
 
         pack();
         setLocationRelativeTo(null);
@@ -192,7 +216,7 @@ public class graph extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ActualisationJTable();
+        ActualisationJTable("SELECT * FROM eleve");
     }//GEN-LAST:event_ButtonAjoutActionPerformed
 
     private void ComboBrancheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBrancheActionPerformed
@@ -200,7 +224,7 @@ public class graph extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboBrancheActionPerformed
 
     private void ButtonActualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonActualiserActionPerformed
-        ActualisationJTable();
+        ActualisationJTable("SELECT * FROM eleve");
     }//GEN-LAST:event_ButtonActualiserActionPerformed
 
     private void ButtonSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSupprimerActionPerformed
@@ -222,9 +246,26 @@ public class graph extends javax.swing.JFrame {
                 Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        ActualisationJTable();
+
+        ActualisationJTable("SELECT * FROM eleve");
     }//GEN-LAST:event_ButtonSupprimerActionPerformed
+
+    private void ButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOkActionPerformed
+        String mot = TxtFieldRecherche.getText();
+        if(RechercheJTable(mot))
+        {
+            ActualisationJTable("SELECT * FROM eleve WHERE nom = '" + mot + "' OR prenom = '"+ mot+ "' OR branche = '"+ mot+ "' OR note = '"+ mot+ "' OR numero = '"+ mot+"';") ;
+            ButtonAnnuler.setVisible(true);
+        }
+    }//GEN-LAST:event_ButtonOkActionPerformed
+
+    private void ButtonOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOk1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonOk1ActionPerformed
+
+    private void ButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAnnulerActionPerformed
+        ActualisationJTable("SELECT * FROM eleve");
+    }//GEN-LAST:event_ButtonAnnulerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,14 +305,17 @@ public class graph extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonActualiser;
     private javax.swing.JButton ButtonAjout;
+    private javax.swing.JButton ButtonAnnuler;
     private javax.swing.JButton ButtonModifier;
+    private javax.swing.JButton ButtonOk;
+    private javax.swing.JButton ButtonOk1;
     private javax.swing.JButton ButtonSupprimer;
     private javax.swing.JComboBox<String> ComboBranche;
     private javax.swing.JTextField TxtFieldNom;
     private javax.swing.JTextField TxtFieldNote;
     private javax.swing.JTextField TxtFieldNum;
     private javax.swing.JTextField TxtFieldPrenom;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTextField TxtFieldRecherche;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -284,11 +328,9 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 
-    private void ActualisationJTable() {
-        String sql = ("SELECT * FROM eleve");
+    private void ActualisationJTable(String sql) {
         System.out.println("Requete :" + sql);
         try {
             int i = 1;
@@ -300,8 +342,24 @@ public class graph extends javax.swing.JFrame {
                 System.out.println(rs.getString("prenom"));
                 i++;
             }
+            ButtonAnnuler.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private boolean RechercheJTable(String recherche) {
+        boolean trouve = false;
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {//For each row
+            for (int j = 0; j < jTable1.getColumnCount(); j++) {//For each column in that row
+                if (jTable1.getModel().getValueAt(i, j).equals(recherche)) {//Search the model
+                    trouve = true;
+                    
+                }
+            }//For loop inner
+        }//For loop outer
+
+        return trouve;
     }
 }
