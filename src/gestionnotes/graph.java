@@ -5,11 +5,17 @@
  */
 package gestionnotes;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Hexor
  */
 public class graph extends javax.swing.JFrame {
+    
+    Connexion conn = new Connexion();
 
     /**
      * Creates new form graph
@@ -130,6 +136,11 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 172, 193, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatique", "Physique/Chimie", "SVT", "Français", "Mathématiques", "Anglais", "Histoire/Géographie", " " }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 212, -1, -1));
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +166,11 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 255, -1, -1));
 
         jButton1.setText("Ajouter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         jButton2.setText("Supprimer");
@@ -191,6 +207,20 @@ public class graph extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String sql = "INSERT INTO eleve (prenom, nom, branche, note) " + "VALUES ('"+jTextField2.getText()+"', '"+jTextField3.getText()+"', '"+String.valueOf(jComboBox1.getSelectedItem())+"', "+jTextField4.getText()+")";
+        System.out.println("Requete :" + sql);
+        try {
+            conn.getStatement().executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
