@@ -7,9 +7,16 @@ package gestionnotes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -25,6 +32,12 @@ public class graph extends javax.swing.JFrame {
     public graph() {
         initComponents();
         ActualisationJTable("SELECT * FROM eleve");
+        
+        jTable1.setAutoCreateRowSorter(true);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());   
+        jTable1.setRowSorter(sorter);
+        
+        sorter.setSortable(0, false);
     }
 
     /**
@@ -205,6 +218,7 @@ public class graph extends javax.swing.JFrame {
         try {
             conn.getStatement().executeUpdate(sql);
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Attention,\nVeuillez saisir correctement les données du formulaire !"," Erreur de saisie...", JOptionPane.WARNING_MESSAGE);
             Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
         }
         ActualisationJTable("SELECT * FROM eleve");
@@ -234,6 +248,7 @@ public class graph extends javax.swing.JFrame {
                 conn.getStatement().executeUpdate(sql);
 //                model.removeRow(rows[i]);
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Attention,\nVeuillez sélectionner une ou plusieurs ligne(s) à supprimer !"," Erreur de selection...", JOptionPane.WARNING_MESSAGE);
                 Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
