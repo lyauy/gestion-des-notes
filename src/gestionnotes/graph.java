@@ -61,6 +61,7 @@ public class graph extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         ButtonOk1 = new javax.swing.JButton();
         ButtonAnnuler = new javax.swing.JButton();
+        jOptionPane1 = new javax.swing.JOptionPane();
 
         jLabel2.setText("jLabel2");
 
@@ -79,6 +80,13 @@ public class graph extends javax.swing.JFrame {
                 "id", "nom", "prenom", "branche", "note"
             }
         ));
+        jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jTable1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 92, -1, 182));
@@ -150,6 +158,11 @@ public class graph extends javax.swing.JFrame {
         getContentPane().add(ButtonSupprimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, -1, -1));
 
         ButtonModifier.setText("Modifier");
+        ButtonModifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonModifierActionPerformed(evt);
+            }
+        });
         getContentPane().add(ButtonModifier, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
 
         ButtonActualiser.setText("Actualiser");
@@ -191,6 +204,7 @@ public class graph extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ButtonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 90, 20));
+        getContentPane().add(jOptionPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -267,6 +281,39 @@ public class graph extends javax.swing.JFrame {
         ActualisationJTable("SELECT * FROM eleve");
     }//GEN-LAST:event_ButtonAnnulerActionPerformed
 
+    private void jTable1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable1CaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1CaretPositionChanged
+
+    private void ButtonModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonModifierActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int[] rows = jTable1.getSelectedRows();
+        String sql;
+        System.out.println("on passe la");
+        final int row = jTable1.getSelectedRow();
+
+        final String valueInCell = (String) jTable1.getValueAt(row, 0);
+
+        for (int i = 0; i < rows.length; i++) {
+            if(rows.length == 1) {
+                sql = "UPDATE eleve SET numero = '" + jTable1.getValueAt(rows[i], 0) + "', prenom = '" + jTable1.getValueAt(rows[i], 1) + "', nom = '" + jTable1.getValueAt(rows[i], 2) + "', branche = '" + jTable1.getValueAt(rows[i], 3) + "', note = '" + jTable1.getValueAt(rows[i], 4) + "' WHERE numero = "+ valueInCell +";";
+                System.out.println("Requete :" + sql);
+                try {
+                    conn.getStatement().executeUpdate(sql);
+                    model.removeRow(rows[i]);
+                } catch (SQLException ex) {
+                    Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else {
+                jOptionPane1.showMessageDialog(this, "Vous ne pouvez modifier qu'une ligne à la fois","Erreur",jOptionPane1.ERROR_MESSAGE);
+                return;
+            }
+        }
+        ActualisationJTable("SELECT * FROM eleve");
+    }//GEN-LAST:event_ButtonModifierActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -326,6 +373,7 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
@@ -362,4 +410,23 @@ public class graph extends javax.swing.JFrame {
 
         return trouve;
     }
+    
+//    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//        int[] rows = jTable1.getSelectedRows();
+//        String sql;
+//        System.out.println("on passe la");
+//        final int row = jTable1.getSelectedRow();
+//
+//        final String valueInCell = (String) jTable1.getValueAt(row, 1);
+//
+//        for (int i = 0; i < rows.length; i++) {
+//            sql = "UPDATE eleve SET numero = '" + jTable1.getValueAt(rows[i], 0) + "', nom = '" + jTable1.getValueAt(rows[i], 1) + "', prenom = '" + jTable1.getValueAt(rows[i], 2) + "', branche = '" + jTable1.getValueAt(rows[i], 3) + "', note = '" + jTable1.getValueAt(rows[i], 4) + "' WHERE nom = "+ valueInCell +";";
+//            System.out.println("Requete :" + sql);
+//            try {
+//                conn.getStatement().executeUpdate(sql);
+//                model.removeRow(rows[i]);
+//            } catch (SQLException ex) {
+//                Logger.getLogger(graph.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
 }
