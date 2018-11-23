@@ -59,7 +59,6 @@ public class graph extends javax.swing.JFrame {
         TxtFieldRecherche = new javax.swing.JTextField();
         ButtonOk = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        ButtonOk1 = new javax.swing.JButton();
         ButtonAnnuler = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
@@ -81,27 +80,27 @@ public class graph extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 92, -1, 182));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 750, 250));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 36)); // NOI18N
         jLabel1.setText("Gestion des notes");
         jLabel1.setMaximumSize(new java.awt.Dimension(101, 30));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 376, 32));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 290, 40));
 
         TxtFieldNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtFieldNumActionPerformed(evt);
             }
         });
-        getContentPane().add(TxtFieldNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 92, 193, -1));
+        getContentPane().add(TxtFieldNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 210, 40));
 
         TxtFieldNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtFieldNomActionPerformed(evt);
             }
         });
-        getContentPane().add(TxtFieldNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 132, 193, -1));
-        getContentPane().add(TxtFieldPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 172, 193, -1));
+        getContentPane().add(TxtFieldNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 210, 40));
+        getContentPane().add(TxtFieldPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 210, 40));
 
         ComboBranche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatique", "Physique/Chimie", "SVT", "Français", "Mathématiques", "Anglais", "Histoire/Géographie" }));
         ComboBranche.addActionListener(new java.awt.event.ActionListener() {
@@ -109,29 +108,29 @@ public class graph extends javax.swing.JFrame {
                 ComboBrancheActionPerformed(evt);
             }
         });
-        getContentPane().add(ComboBranche, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 212, -1, -1));
+        getContentPane().add(ComboBranche, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 210, 40));
 
         TxtFieldNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtFieldNoteActionPerformed(evt);
             }
         });
-        getContentPane().add(TxtFieldNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 252, 193, -1));
+        getContentPane().add(TxtFieldNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 210, 40));
 
         jLabel3.setText("id :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 95, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 30, 30));
 
         jLabel4.setText("Nom :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 135, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 50, 30));
 
         jLabel5.setText("Prenom : ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 175, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 70, 30));
 
         jLabel6.setText("Branche :");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 215, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 30));
 
         jLabel7.setText("Note :");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 255, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 50, 30));
 
         ButtonAjout.setText("Ajouter");
         ButtonAjout.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +138,7 @@ public class graph extends javax.swing.JFrame {
                 ButtonAjoutActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonAjout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        getContentPane().add(ButtonAjout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 270, 40));
 
         ButtonSupprimer.setText("Supprimer");
         ButtonSupprimer.addActionListener(new java.awt.event.ActionListener() {
@@ -147,10 +146,10 @@ public class graph extends javax.swing.JFrame {
                 ButtonSupprimerActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonSupprimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, -1, -1));
+        getContentPane().add(ButtonSupprimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 120, 40));
 
         ButtonModifier.setText("Modifier");
-        getContentPane().add(ButtonModifier, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
+        getContentPane().add(ButtonModifier, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 340, 100, 40));
 
         ButtonActualiser.setText("Actualiser");
         ButtonActualiser.addActionListener(new java.awt.event.ActionListener() {
@@ -158,11 +157,11 @@ public class graph extends javax.swing.JFrame {
                 ButtonActualiserActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonActualiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
+        getContentPane().add(ButtonActualiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 110, 40));
 
         jLabel8.setText("Rechercher : ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 80, 20));
-        getContentPane().add(TxtFieldRecherche, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 170, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 80, 40));
+        getContentPane().add(TxtFieldRecherche, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 120, 40));
 
         ButtonOk.setText("OK");
         ButtonOk.addActionListener(new java.awt.event.ActionListener() {
@@ -170,19 +169,11 @@ public class graph extends javax.swing.JFrame {
                 ButtonOkActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 70, 20));
+        getContentPane().add(ButtonOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 70, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
         jLabel9.setText("Réalisé par Ugo Perniceni, Thibaut Yauy");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, 230, -1));
-
-        ButtonOk1.setText("OK");
-        ButtonOk1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonOk1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ButtonOk1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 70, 20));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 400, 230, -1));
 
         ButtonAnnuler.setText("Annuler");
         ButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +181,7 @@ public class graph extends javax.swing.JFrame {
                 ButtonAnnulerActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 90, 20));
+        getContentPane().add(ButtonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, 80, 40));
 
         pack();
         setLocationRelativeTo(null);
@@ -259,10 +250,6 @@ public class graph extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ButtonOkActionPerformed
 
-    private void ButtonOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOk1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonOk1ActionPerformed
-
     private void ButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAnnulerActionPerformed
         ActualisationJTable("SELECT * FROM eleve");
     }//GEN-LAST:event_ButtonAnnulerActionPerformed
@@ -308,7 +295,6 @@ public class graph extends javax.swing.JFrame {
     private javax.swing.JButton ButtonAnnuler;
     private javax.swing.JButton ButtonModifier;
     private javax.swing.JButton ButtonOk;
-    private javax.swing.JButton ButtonOk1;
     private javax.swing.JButton ButtonSupprimer;
     private javax.swing.JComboBox<String> ComboBranche;
     private javax.swing.JTextField TxtFieldNom;
